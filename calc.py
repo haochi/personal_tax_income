@@ -25,8 +25,8 @@ def tax_calc(params):
     'income_tax': income_tax,
     'medicare_tax': medicare_tax,
     'social_security': social_security_tax,
-    'effective_income_tax_rate': income_tax/gross_income,
     'total_tax': total_tax,
+    'effective_income_tax_rate': income_tax/gross_income,
     'effective_total_tax_rate': total_tax/gross_income,
     'take_home': gross_income - total_tax,
   }
@@ -48,4 +48,13 @@ def tax_calc_2012(gross_income):
     'medicare_tax_rate'       : .0145,
   }) 
 
-print tax_calc_2012(gross_income=1e7)
+def main():
+  print("What's your gross income?")
+  income = int(raw_input())
+  tax_info = tax_calc_2012(gross_income=income)
+  max_width = max(len(key) for key in tax_info.iterkeys())
+  for label, number in tax_info.iteritems():
+    print('{0}: {1}'.format(label.rjust(max_width), number))
+
+if __name__ == '__main__':
+  main()
